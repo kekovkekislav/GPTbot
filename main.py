@@ -18,14 +18,11 @@ from generate import generate_response
 
 
 
-
 openai.api_key = API_KEY
 print(openai.api_key)
 bot = Bot(TOKEN)
 dp = Dispatcher(bot, storage= MemoryStorage())
 
-
-#print(openai.Model.list())
 
 
 class GPTMode(StatesGroup):
@@ -69,21 +66,19 @@ async def send_weather(message: types.Message):
             humidity = data["current"]["humidity"]
 
             await message.answer(
-    f"\U0001F551{datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
-    f"_Местоположение_: *{country}*, *{city}*\n"
-    f"\U0001F321_Температура_: *{cur_weather}°C*, *{weather_description}*\n"
-    f"🧍‍♂️_По ощущениям_: *{weather_feelslike}°C*\n"
-    f"\U0001F32A_Ветер_: *{wind}m/s*\n"
-    f"\U0001F4A7_Влажность:_ *{humidity}%*\n"
-    f"\n*Хорошего дня!*",
-    parse_mode=types.ParseMode.MARKDOWN
-)
-    
-
+                f"\U0001F551{datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
+                f"_Местоположение_: *{country}*, *{city}*\n"
+                f"\U0001F321_Температура_: *{cur_weather}°C*, *{weather_description}*\n"
+                f"🧍‍♂️_По ощущениям_: *{weather_feelslike}°C*\n"
+                f"\U0001F32A_Ветер_: *{wind}m/s*\n"
+                f"\U0001F4A7_Влажность:_ *{humidity}%*\n"
+                f"\n*Хорошего дня!*",
+                parse_mode=types.ParseMode.MARKDOWN
+            )
+        
         except:
             await message.answer("Ошибка! Проверьте название города!")
    
-
 ##GPT RESPONSE 
 @dp.message_handler(state = GPTMode.GPT)
 async def chat(message: types.Message, state: FSMContext):
@@ -91,9 +86,5 @@ async def chat(message: types.Message, state: FSMContext):
     await message.answer(gpt_response["choices"][0]["text"])
     
 
-
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
-
-
-
