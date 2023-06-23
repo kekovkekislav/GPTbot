@@ -67,9 +67,9 @@ async def send_weather(message: types.Message):
 
             await message.answer(
                 f"\U0001F551{datetime.now().strftime('%Y-%m-%d %H:%M')}\n"
-                f"_Местоположение_: *{country}*, *{city}*\n"
+                f"\U0001F30D_Местоположение_: *{country}*, *{city}*\n"
                 f"\U0001F321_Температура_: *{cur_weather}°C*, *{weather_description}*\n"
-                f"🧍‍♂️_По ощущениям_: *{weather_feelslike}°C*\n"
+                f"\U0001F9CD_По ощущениям_: *{weather_feelslike}°C*\n"
                 f"\U0001F32A_Ветер_: *{wind}m/s*\n"
                 f"\U0001F4A7_Влажность:_ *{humidity}%*\n"
                 f"\n*Хорошего дня!*",
